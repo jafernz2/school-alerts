@@ -3,57 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Emergency Alerts</title>
+    <title>Inspire Schools - Alert System</title>
+    <style>
+        /* Styling for the header */
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+        
+        /* Styling for the dropdown menu */
+        select {
+            width: 200px;
+            height: 40px;
+            font-size: 1.2em;
+            margin: 20px auto;
+            display: block;
+            padding: 5px;
+            border-radius: 5px;
+            border: 2px solid #2c3e50;
+            background-color: #ecf0f1;
+        }
+        
+        /* Styling for the buttons */
+        button {
+            display: block;
+            width: 250px;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 1.2em;
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #3498db;
+        }
+
+        /* Styling for the container */
+        .container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
     <script>
-        // Function to show confirmation and activate Team Alert
-        function activateTeamAlert() {
-            const confirmation = confirm("Are you sure you want to activate the Team Alert?");
+        // Function to show confirmation and activate the alerts based on the selected school
+        function activateAlert(alertType) {
+            const confirmation = confirm(`Are you sure you want to activate the ${alertType} Alert?`);
+
             if (confirmation) {
-                alert("Team Alert Activated: Please follow the designated procedures. Be calm and cooperate with the team.");
+                let alertMessage = "";
+
+                switch (alertType) {
+                    case "Team":
+                        alertMessage = "Team Alert Activated: Please follow the designated procedures. Be calm and cooperate with the team.";
+                        break;
+                    case "Lock Down":
+                        alertMessage = "Lock Down Alert Activated: Lock all doors, turn off lights, and stay away from windows.";
+                        break;
+                    case "Fire":
+                        alertMessage = "Fire Alert Activated: Please exit the building immediately using the nearest exit. Follow the evacuation plan.";
+                        break;
+                    case "Medical":
+                        alertMessage = "Medical Emergency Alert: Please remain calm. The medical team will arrive shortly. Stay clear of the area.";
+                        break;
+                    case "Earthquake":
+                        alertMessage = "Earthquake Alert Activated: Drop, cover, and hold on. Stay indoors and away from windows.";
+                        break;
+                    default:
+                        alertMessage = `Unknown Alert: ${alertType}`;
+                }
+
+                alert(alertMessage);
             }
         }
 
-        // Function to show confirmation and activate Lock Down Alert
-        function activateLockDownAlert() {
-            const confirmation = confirm("Are you sure you want to activate the Lock Down Alert?");
-            if (confirmation) {
-                alert("Lock Down Alert Activated: Lock all doors, turn off lights, and stay away from windows.");
-            }
-        }
-
-        // Function to show confirmation and activate Fire Alert
-        function activateFireAlert() {
-            const confirmation = confirm("Are you sure you want to activate the Fire Alert?");
-            if (confirmation) {
-                alert("Fire Alert Activated: Please exit the building immediately using the nearest exit. Follow the evacuation plan.");
-            }
-        }
-
-        // Function to show confirmation and activate Medical Emergency Alert
-        function activateMedicalAlert() {
-            const confirmation = confirm("Are you sure you want to activate the Medical Emergency Alert?");
-            if (confirmation) {
-                alert("Medical Emergency Alert: Please remain calm. The medical team will arrive shortly. Stay clear of the area.");
-            }
-        }
-
-        // Function to show confirmation and activate Earthquake Alert
-        function activateEarthquakeAlert() {
-            const confirmation = confirm("Are you sure you want to activate the Earthquake Alert?");
-            if (confirmation) {
-                alert("Earthquake Alert Activated: Drop, cover, and hold on. Stay indoors and away from windows.");
-            }
+        // Function to handle the dropdown selection
+        function handleSchoolSelection() {
+            const selectedSchool = document.getElementById("schoolSelect").value;
+            alert(`You have selected: ${selectedSchool}`);
         }
     </script>
 </head>
 <body>
-    <h1>School Emergency Alerts</h1>
+    <div class="container">
+        <!-- Large Header -->
+        <h1>Inspire Schools - Alert System</h1>
+        
+        <!-- Dropdown Menu -->
+        <select id="schoolSelect" onchange="handleSchoolSelection()">
+            <option value="ISD FULL">ISD FULL</option>
+            <option value="IES">IES</option>
+            <option value="IMS">IMS</option>
+            <option value="IHS">IHS</option>
+        </select>
 
-    <button onclick="activateTeamAlert()">Activate Team Alert</button>
-    <button onclick="activateLockDownAlert()">Activate Lock Down Alert</button>
-    <button onclick="activateFireAlert()">Activate Fire Alert</button>
-    <button onclick="activateMedicalAlert()">Activate Medical Emergency</button>
-    <button onclick="activateEarthquakeAlert()">Activate Earthquake Alert</button>
-
+        <!-- Alert Buttons -->
+        <button onclick="activateAlert('Team')">Activate Team Alert</button>
+        <button onclick="activateAlert('Lock Down')">Activate Lock Down Alert</button>
+        <button onclick="activateAlert('Fire')">Activate Fire Alert</button>
+        <button onclick="activateAlert('Medical')">Activate Medical Emergency</button>
+        <button onclick="activateAlert('Earthquake')">Activate Earthquake Alert</button>
+    </div>
 </body>
 </html>
