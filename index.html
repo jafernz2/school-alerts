@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Emergency Alerts</title>
+    <script>
+        // Function to show confirmation and activate Team Alert
+        function activateTeamAlert() {
+            const confirmation = confirm("Are you sure you want to activate the Team Alert?");
+            if (confirmation) {
+                alert("Team Alert Activated: Please follow the designated procedures. Be calm and cooperate with the team.");
+            }
+        }
+
+        // Function to show confirmation and activate Lock Down Alert
+        function activateLockDownAlert() {
+            const confirmation = confirm("Are you sure you want to activate the Lock Down Alert?");
+            if (confirmation) {
+                alert("Lock Down Alert Activated: Lock all doors, turn off lights, and stay away from windows.");
+            }
+        }
+
+        // Function to show confirmation and activate Fire Alert
+        function activateFireAlert() {
+            const confirmation = confirm("Are you sure you want to activate the Fire Alert?");
+            if (confirmation) {
+                alert("Fire Alert Activated: Please exit the building immediately using the nearest exit. Follow the evacuation plan.");
+            }
+        }
+
+        // Function to show confirmation and activate Medical Emergency Alert
+        function activateMedicalAlert() {
+            const confirmation = confirm("Are you sure you want to activate the Medical Emergency Alert?");
+            if (confirmation) {
+                alert("Medical Emergency Alert: Please remain calm. The medical team will arrive shortly. Stay clear of the area.");
+            }
+        }
+
+        // Function to show confirmation and activate Earthquake Alert
+        function activateEarthquakeAlert() {
+            const confirmation = confirm("Are you sure you want to activate the Earthquake Alert?");
+            if (confirmation) {
+                alert("Earthquake Alert Activated: Drop, cover, and hold on. Stay indoors and away from windows.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>School Emergency Alerts</h1>
+
+    <button onclick="activateTeamAlert()">Activate Team Alert</button>
+    <button onclick="activateLockDownAlert()">Activate Lock Down Alert</button>
+    <button onclick="activateFireAlert()">Activate Fire Alert</button>
+    <button onclick="activateMedicalAlert()">Activate Medical Emergency</button>
+    <button onclick="activateEarthquakeAlert()">Activate Earthquake Alert</button>
+
+</body>
+</html>
