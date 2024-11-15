@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -50,10 +50,29 @@
             max-width: 800px;
             margin: 0 auto;
         }
+
+        /* Styling for the code input */
+        #codeInput {
+            width: 200px;
+            padding: 10px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 2px solid #2c3e50;
+            background-color: #ecf0f1;
+        }
     </style>
     <script>
         // Function to show confirmation and activate the alerts based on the selected school
         function activateAlert(alertType) {
+            const codeInput = document.getElementById("codeInput").value;
+
+            // Check if the entered code is '1234'
+            if (codeInput !== "1234") {
+                alert("Error: The code is incorrect. Please enter the correct code to proceed.");
+                return;
+            }
+
             const confirmation = confirm(`Are you sure you want to activate the ${alertType} Alert?`);
 
             if (confirmation) {
@@ -102,6 +121,9 @@
             <option value="IMS">IMS</option>
             <option value="IHS">IHS</option>
         </select>
+
+        <!-- Code Input Field for Confirmation -->
+        <input type="text" id="codeInput" placeholder="Enter Code (1234)" />
 
         <!-- Alert Buttons -->
         <button onclick="activateAlert('Team')">Activate Team Alert</button>
