@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -51,33 +51,39 @@
             margin: 0 auto;
         }
 
-        /* Styling for the code input */
-        #codeInput {
-            width: 200px;
-            padding: 10px;
+        /* Error message styling */
+        #errorMessage {
+            color: #e74c3c;
             font-size: 1.2em;
             margin-top: 20px;
-            border-radius: 5px;
-            border: 2px solid #2c3e50;
-            background-color: #ecf0f1;
+            display: none; /* Hidden by default */
         }
     </style>
     <script>
         // Function to show confirmation and activate the alerts based on the selected school
         function activateAlert(alertType) {
-            const codeInput = document.getElementById("codeInput").value;
+            // Prompt the user to enter the code
+            const codeInput = prompt("Please enter the code to activate the alert: (Code is 1234)");
 
             // Check if the entered code is '1234'
             if (codeInput !== "1234") {
-                alert("Error: The code is incorrect. Please enter the correct code to proceed.");
-                return;
+                // Display the error message if the code is incorrect
+                const errorMessage = document.getElementById("errorMessage");
+                errorMessage.style.display = "block"; // Show the error message
+                errorMessage.innerHTML = "Error: The code must match '1234' to proceed.";
+                return; // Stop the function if the code is wrong
+            } else {
+                // Hide the error message if the code is correct
+                document.getElementById("errorMessage").style.display = "none";
             }
 
+            // If the code is correct, ask for confirmation to activate the alert
             const confirmation = confirm(`Are you sure you want to activate the ${alertType} Alert?`);
 
             if (confirmation) {
                 let alertMessage = "";
 
+                // Set the appropriate message based on the alert type
                 switch (alertType) {
                     case "Team":
                         alertMessage = "Team Alert Activated: Please follow the designated procedures. Be calm and cooperate with the team.";
@@ -98,6 +104,7 @@
                         alertMessage = `Unknown Alert: ${alertType}`;
                 }
 
+                // Show the alert message
                 alert(alertMessage);
             }
         }
@@ -122,8 +129,8 @@
             <option value="IHS">IHS</option>
         </select>
 
-        <!-- Code Input Field for Confirmation -->
-        <input type="text" id="codeInput" placeholder="Enter Code (1234)" />
+        <!-- Error Message Display (Hidden by default) -->
+        <div id="errorMessage"></div>
 
         <!-- Alert Buttons -->
         <button onclick="activateAlert('Team')">Activate Team Alert</button>
