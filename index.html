@@ -5,37 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ISD Alert System</title>
     <style>
+        /* General body styles */
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #6e7dff, #b3c6ff);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #5C6BC0, #3F51B5);
             text-align: center;
-            padding: 20px;
-            color: #333;
-        }
-        h1 {
-            font-size: 36px;
+            padding: 40px;
+            margin: 0;
             color: #fff;
         }
+        
+        /* Header styles */
+        h1 {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+        
+        /* Dropdown container styles */
+        .dropdown-container {
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        
+        label {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        select {
+            padding: 12px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 250px;
+            background-color: #fff;
+            color: #333;
+            transition: background-color 0.3s ease;
+        }
+        
+        select:focus {
+            background-color: #E8EAF6;
+            outline: none;
+        }
+
+        /* Button container styles */
+        .button-container {
+            margin-top: 30px;
+        }
+
         button {
-            background-color: #ff4d4d;
+            background-color: #FF5252;
             color: white;
             border: none;
-            padding: 15px 25px;
-            margin: 10px;
-            font-size: 18px;
+            padding: 18px 30px;
+            font-size: 20px;
+            margin: 15px 10px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: transform 0.3s, background-color 0.3s;
         }
+
         button:hover {
-            background-color: #ff1a1a;
+            background-color: #FF1744;
+            transform: scale(1.05);
         }
-        select {
-            padding: 10px;
-            font-size: 16px;
-            margin-top: 20px;
+
+        button:active {
+            background-color: #D50000;
+            transform: scale(1.1);
         }
-        .dropdown-container {
-            margin-top: 20px;
+
+        button:focus {
+            outline: none;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            select {
+                width: 80%;
+                font-size: 16px;
+            }
+
+            button {
+                width: 90%;
+                font-size: 18px;
+                padding: 15px;
+            }
         }
     </style>
 </head>
@@ -44,7 +108,7 @@
     <h1>ISD Alert System</h1>
 
     <div class="dropdown-container">
-        <label for="district">Select District: </label>
+        <label for="district">Select District:</label>
         <select id="district" onchange="populateSchools()">
             <option value="none">-- Select District --</option>
             <option value="Inferno">Inferno</option>
@@ -53,13 +117,13 @@
     </div>
 
     <div class="dropdown-container">
-        <label for="school">Select School: </label>
+        <label for="school">Select School:</label>
         <select id="school">
             <option value="none">-- Select a School --</option>
         </select>
     </div>
 
-    <div>
+    <div class="button-container">
         <button onclick="triggerAlert('Fire')">Fire Alert</button>
         <button onclick="triggerAlert('Active Shooter')">Active Shooter</button>
         <button onclick="triggerAlert('Lockdown')">Lockdown</button>
