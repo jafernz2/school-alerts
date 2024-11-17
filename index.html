@@ -3,141 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inspire Schools - Alert System</title>
+    <title>ISD Alert System</title>
     <style>
-        /* Styling for the header */
-        h1 {
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #6e7dff, #b3c6ff);
             text-align: center;
-            font-size: 3em;
-            color: #2c3e50;
-            margin-top: 30px;
+            padding: 20px;
+            color: #333;
         }
-        
-        /* Styling for the dropdown menu */
-        select {
-            width: 200px;
-            height: 40px;
-            font-size: 1.2em;
-            margin: 20px auto;
-            display: block;
-            padding: 5px;
-            border-radius: 5px;
-            border: 2px solid #2c3e50;
-            background-color: #ecf0f1;
+        h1 {
+            font-size: 36px;
+            color: #fff;
         }
-        
-        /* Styling for the buttons */
         button {
-            display: block;
-            width: 250px;
-            margin: 20px auto;
-            padding: 10px;
-            font-size: 1.2em;
-            background-color: #2980b9;
+            background-color: #ff4d4d;
             color: white;
             border: none;
-            border-radius: 5px;
+            padding: 15px 25px;
+            margin: 10px;
+            font-size: 18px;
             cursor: pointer;
+            border-radius: 5px;
         }
-        
         button:hover {
-            background-color: #3498db;
+            background-color: #ff1a1a;
         }
-
-        /* Styling for the container */
-        .container {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Error message styling */
-        #errorMessage {
-            color: #e74c3c;
-            font-size: 1.2em;
+        select {
+            padding: 10px;
+            font-size: 16px;
             margin-top: 20px;
-            display: none; /* Hidden by default */
+        }
+        .dropdown-container {
+            margin-top: 20px;
         }
     </style>
-    <script>
-        // Function to show confirmation and activate the alerts based on the selected school
-        function activateAlert(alertType) {
-            // Prompt the user to enter the code
-            const codeInput = prompt("Please enter the code to activate the alert: (Code is 1234)");
-
-            // Check if the entered code is '1234'
-            if (codeInput !== "1234") {
-                // Display the error message if the code is incorrect
-                const errorMessage = document.getElementById("errorMessage");
-                errorMessage.style.display = "block"; // Show the error message
-                errorMessage.innerHTML = "Error: The code must match '1234' to proceed.";
-                return; // Stop the function if the code is wrong
-            } else {
-                // Hide the error message if the code is correct
-                document.getElementById("errorMessage").style.display = "none";
-            }
-
-            // If the code is correct, ask for confirmation to activate the alert
-            const confirmation = confirm(`Are you sure you want to activate the ${alertType} Alert?`);
-
-            if (confirmation) {
-                let alertMessage = "";
-
-                // Set the appropriate message based on the alert type
-                switch (alertType) {
-                    case "Team":
-                        alertMessage = "Team Alert Activated: Please follow the designated procedures. Be calm and cooperate with the team.";
-                        break;
-                    case "Lock Down":
-                        alertMessage = "Lock Down Alert Activated: Lock all doors, turn off lights, and stay away from windows.";
-                        break;
-                    case "Fire":
-                        alertMessage = "Fire Alert Activated: Please exit the building immediately using the nearest exit. Follow the evacuation plan.";
-                        break;
-                    case "Medical":
-                        alertMessage = "Medical Emergency Alert: Please remain calm. The medical team will arrive shortly. Stay clear of the area.";
-                        break;
-                    case "Earthquake":
-                        alertMessage = "Earthquake Alert Activated: Drop, cover, and hold on. Stay indoors and away from windows.";
-                        break;
-                    default:
-                        alertMessage = `Unknown Alert: ${alertType}`;
-                }
-
-                // Show the alert message
-                alert(alertMessage);
-            }
-        }
-
-        // Function to handle the dropdown selection
-        function handleSchoolSelection() {
-            const selectedSchool = document.getElementById("schoolSelect").value;
-            alert(`You have selected: ${selectedSchool}`);
-        }
-    </script>
 </head>
 <body>
-    <div class="container">
-        <!-- Large Header -->
-        <h1>Inspire Schools - Alert System</h1>
-        
-        <!-- Dropdown Menu -->
-        <select id="schoolSelect" onchange="handleSchoolSelection()">
-            <option value="ISD FULL">ISD FULL</option>
-            <option value="IES">IES</option>
-            <option value="IMS">IMS</option>
-            <option value="IHS">IHS</option>
+
+    <h1>ISD Alert System</h1>
+
+    <div class="dropdown-container">
+        <label for="district">Select District: </label>
+        <select id="district" onchange="populateSchools()">
+            <option value="none">-- Select District --</option>
+            <option value="Inferno">Inferno</option>
+            <option value="Inspire">Inspire</option>
         </select>
-
-        <!-- Error Message Display (Hidden by default) -->
-        <div id="errorMessage"></div>
-
-        <!-- Alert Buttons -->
-        <button onclick="activateAlert('Team')">Activate Team Alert</button>
-        <button onclick="activateAlert('Lock Down')">Activate Lock Down Alert</button>
-        <button onclick="activateAlert('Fire')">Activate Fire Alert</button>
-        <button onclick="activateAlert('Medical')">Activate Medical Emergency</button>
-        <button onclick="activateAlert('Earthquake')">Activate Earthquake Alert</button>
     </div>
+
+    <div class="dropdown-container">
+        <label for="school">Select School: </label>
+        <select id="school">
+            <option value="none">-- Select a School --</option>
+        </select>
+    </div>
+
+    <div>
+        <button onclick="triggerAlert('Fire')">Fire Alert</button>
+        <button onclick="triggerAlert('Active Shooter')">Active Shooter</button>
+        <button onclick="triggerAlert('Lockdown')">Lockdown</button>
+        <button onclick="triggerAlert('Team Assist')">Team Assist</button>
+        <button onclick="triggerAlert('Medical Emergency')">Medical Emergency</button>
+        <button onclick="triggerAlert('Evacuation')">Evacuation</button>
+    </div>
+
+    <script>
+        // School options for Inferno and Inspire districts
+        const schools = {
+            Inferno: [
+                "Inferno High School",
+                "Inferno Blue Middle School",
+                "Inferno Red Middle School",
+                "Inferno Black Middle School",
+                "Westlake Elementary School",
+                "Great Lakes Elementary School",
+                "Goreville Elementary School",
+                "Alexandra Elementary School",
+                "Rosa Elementary School",
+                "Zed Elementary School",
+                "Abby Pre-K Center",
+                "Robinson Center for Education Intervention",
+                "Alternate Schooling",
+                "Corevill Vocational School"
+            ],
+            Inspire: [
+                "IHS",
+                "IES",
+                "IMS"
+            ]
+        };
+
+        // Populate school dropdown based on district selection
+        function populateSchools() {
+            const district = document.getElementById('district').value;
+            const schoolSelect = document.getElementById('school');
+            schoolSelect.innerHTML = '<option value="none">-- Select a School --</option>';
+
+            if (district === 'Inferno' || district === 'Inspire') {
+                schools[district].forEach(school => {
+                    const option = document.createElement('option');
+                    option.value = school;
+                    option.textContent = school;
+                    schoolSelect.appendChild(option);
+                });
+            }
+        }
+
+        // Function to trigger an alert
+        function triggerAlert(alertType) {
+            const district = document.getElementById('district').value;
+            const school = document.getElementById('school').value;
+
+            if (district === 'none' || school === 'none') {
+                alert('Please select a district and a school.');
+                return;
+            }
+
+            const code = prompt("Please enter the activation code to proceed:");
+
+            // Check for valid code (using 4-digit code check)
+            if (!/^\d{4}$/.test(code)) {
+                alert('Invalid code. Please enter a 4-digit code.');
+                return;
+            }
+
+            const confirmation = confirm(`Are you sure you want to trigger the ${alertType} alert at ${school}?`);
+
+            if (confirmation) {
+                alert(`Alert activated: ${alertType} at ${school}\n\nInstructions: Please follow safety protocols and evacuate the premises if needed. Stay calm and wait for further instructions.`);
+            } else {
+                alert('Alert activation cancelled.');
+            }
+        }
+    </script>
+
 </body>
 </html>
